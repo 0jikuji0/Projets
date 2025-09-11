@@ -38,8 +38,8 @@ Want to add a new project?
 
 | Name | Language | YouTube Link | Duration | Difficulty (1-10) | Language of Video |
 |------|----------|--------------|----------|-------------------|-------------------|
-| Example Project | Python | [Watch Here](https://youtu.be/example) | 15 min | 4 | 🇫🇷 French |
-| Example Project 2 | C | [Watch Here](https://youtu.be/example2) | 22 min | 6 | 🇬🇧 English |
+| CurrencyConverter | Python | [No link](https://youtu.be/example) | 10 min | 4 | 🇫🇷 French |
+| RandomPasswordGenerator | Python | [No link](https://youtu.be/example2) | 10 min | 4 | 🇫🇷 French  |
 | Example Project 3 | C++ | [Watch Here](https://youtu.be/example3) | 30 min | 7 | 🇫🇷 French |
 | Example Project 4 | C# | [Watch Here](https://youtu.be/example4) | 18 min | 5 | 🇬🇧 English |
 
