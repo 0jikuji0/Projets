@@ -38,9 +38,9 @@ Want to add a new project?
 
 | Name | Language | YouTube Link | Duration | Difficulty (1-10) | Language of Video |
 |------|----------|--------------|----------|-------------------|-------------------|
-| CurrencyConverter | Python | [No link](https://youtu.be/example) | 10 min | 4 | 🇫🇷 French |
-| RandomPasswordGenerator | Python | [No link](https://youtu.be/example2) | 10 min | 4 | 🇫🇷 French  |
-| Example Project 3 | C++ | [Watch Here](https://youtu.be/example3) | 30 min | 7 | 🇫🇷 French |
+| CurrencyConverter | Python | [No link]() | 10 min | 4 | 🇫🇷 French |
+| RandomPasswordGenerator | Python | [No link]() | 10 min | 4 | 🇫🇷 French  |
+| ImageToPdf | Python | [No link]() | 5 min | 4 | 🇫🇷 French  |
+| RainbowCirclePattern | Python | [No link]() | 10 min | 4 | 🇫🇷 French  |
 | Code-editor| Html-Css-Js | [Watch Here](https://www.youtube.com/watch?v=Vs4hQsDpxww&list=PLhkm3BkGypZw1LzV89WMog5Vi0jrX4lou&index=13) | 3h | 4 | 🇬🇧 English |
-
 ---
