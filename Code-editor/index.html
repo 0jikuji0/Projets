@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Editor</title>
+  </head>
+  <body>
+    <header>
+      <div class="container row">
+        <div class="brand">
+          <div class="logo"></div>
+          <div class="title">Code Editor</div>
+        </div>
+
+        <div class="row">
+          <button class="btn secondary" id="saevBtn" title="Save work locally">
+            <span>Save</span>
+          </button>
+          <button class="btn secondary" id="loadBtn" title="laod work file">
+            <span>Load</span>
+          </button>
+          <input id="openfile" type="file" accept="application/json" hidden />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <aside class="card panel stack">
+        <h2>Task / Assignement</h2>
+
+        <textarea
+          id="assignement"
+          class="text"
+          placeholder="Write the task desceiption here ..."
+        ></textarea>
+
+        <div class="stack">
+          <label for="testArea"
+            >Valadation tests (Javascript only - optional)</label
+          >
+          <textarea
+            id="testArea"
+            class="text"
+            placeholder="Write simple tests to append after the students code to check the solution"
+          ></textarea>
+        </div>
+
+        <div class="muted">
+          tip: <span class="kdb">Ctrl</span> + <span class="kdb">S</span> to save,
+          <span class="kdb">Ctrl</span> + <span class="kdb">Enter</span> to run. 
+        </div>
+      </aside>
+
+      <section class="stack" id="web-only">
+
+        <div id="webEditor" class="stack panel card">
+            <div class="row">
+                <h2>HTML / CSS / JS</h2>
+                <div class="row">
+                    <button class="btn ok" id="runWeb">Run</button>
+                    <button class="btn secondary" id="openPreview">Open preview in a new window</button>
+                </div>           
+            </div>
+            <div class="tabs" id="webTabs" role="tablist" aria-label="web editors"></div>
+        </div>
+      </section>
+
+    </main>
+  </body>
+</html>

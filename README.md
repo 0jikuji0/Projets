@@ -41,6 +41,6 @@ Want to add a new project?
 | CurrencyConverter | Python | [No link](https://youtu.be/example) | 10 min | 4 | 🇫🇷 French |
 | RandomPasswordGenerator | Python | [No link](https://youtu.be/example2) | 10 min | 4 | 🇫🇷 French  |
 | Example Project 3 | C++ | [Watch Here](https://youtu.be/example3) | 30 min | 7 | 🇫🇷 French |
-| Example Project 4 | C# | [Watch Here](https://youtu.be/example4) | 18 min | 5 | 🇬🇧 English |
+| Code-editor| Html-Css-Js | [Watch Here](https://www.youtube.com/watch?v=Vs4hQsDpxww&list=PLhkm3BkGypZw1LzV89WMog5Vi0jrX4lou&index=13) | 3h | 4 | 🇬🇧 English |
 
 ---
