@@ -1,6 +1,6 @@
 /*
-  Système de verrouillage par code avec communication I2C
-  Ce programme gère un système de verrouillage à 6 boutons, avec validation par capteur infrarouge.
+  Système de coffre-fort par code avec communication I2C
+  Ce programme gère un système de coffre-fort à 6 boutons, avec validation par capteur infrarouge.
   La séquence correcte est envoyée à un esclave via I2C pour déclencher l'ouverture.
   En cas d'erreur, le nombre de tentatives incorrectes est communiqué à l'esclave.
 
@@ -11,7 +11,7 @@
   - En cas d'erreur, le nombre d'erreurs (1 à 3) est envoyé à l'esclave.
   - Après 3 erreurs, le système se réinitialise après un délai.
 
-  Créé le 19/09/2025 par [ton nom]
+  Créé le 19/09/2025 par Timeo, Joachim et Camille
 
   Basé sur les bibliothèques Arduino et Wire.h
 */
@@ -21,7 +21,7 @@
 #include <Wire.h> // Bibliothèque pour la communication I2C
 
 int buttons_pins[6] = {2, 3, 4, 5, 6, 7}; // Broches des 6 boutons
-int correct[6] = {0, 1, 2, 3, 4, 5};     // Séquence correcte à entrer
+int correct[6] = {0,2,4,1,3,5};     // Séquence correcte à entrer
 int attempts[6];                         // Tableau pour stocker les tentatives
 int attemptIndex = 0;                    // Index de la tentative en cours
 int error = 0;                           // Compteur d'erreurs
