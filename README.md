@@ -44,4 +44,5 @@ Want to add a new project?
 | RainbowCirclePattern | Python | [No link]() | 10 min | 4 | 🇫🇷 French  |
 | Code-editor| Html-Css-Js | [Watch Here](https://www.youtube.com/watch?v=Vs4hQsDpxww&list=PLhkm3BkGypZw1LzV89WMog5Vi0jrX4lou&index=13) | 3hr | 4 | 🇬🇧 English |
 | Arduino-I2C-SafeChess | Arduino(C++) | [No link]() | 7hr | 7 | 🇫🇷 French  |
+| ColorfulGalaxy | Python | [No link]() | 15min | 3 | 🇬🇧 English  |
 ---
