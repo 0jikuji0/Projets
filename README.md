@@ -42,5 +42,6 @@ Want to add a new project?
 | RandomPasswordGenerator | Python | [No link]() | 10 min | 4 | 🇫🇷 French  |
 | ImageToPdf | Python | [No link]() | 5 min | 4 | 🇫🇷 French  |
 | RainbowCirclePattern | Python | [No link]() | 10 min | 4 | 🇫🇷 French  |
-| Code-editor| Html-Css-Js | [Watch Here](https://www.youtube.com/watch?v=Vs4hQsDpxww&list=PLhkm3BkGypZw1LzV89WMog5Vi0jrX4lou&index=13) | 3h | 4 | 🇬🇧 English |
+| Code-editor| Html-Css-Js | [Watch Here](https://www.youtube.com/watch?v=Vs4hQsDpxww&list=PLhkm3BkGypZw1LzV89WMog5Vi0jrX4lou&index=13) | 3hr | 4 | 🇬🇧 English |
+| Arduino-I2C-SafeChess | Arduino(C++) | [No link]() | 7hr | 7 | 🇫🇷 French  |
 ---
