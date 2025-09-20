@@ -13,3 +13,4 @@ for x in range(360):
     t.forward(x)
     t.right(59)
     turtle.hideturtle()
+turtle.done()
