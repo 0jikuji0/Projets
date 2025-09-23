@@ -1,8 +1,8 @@
 import turtle, colorsys
 
-turtle.bgcolor('black');
-t = turtle.Turtle();
-t.speed(0);
+turtle.bgcolor('black')
+t = turtle.Turtle()
+t.speed(0)
 turtle.colormode(255)
 n = 36; h = 0
 for i in range(72):
