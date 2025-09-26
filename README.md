@@ -49,5 +49,6 @@ Want to add a new project?
 | PsychedelicGradientArt| Python | [No link]() | 10min | 2 | 🇬🇧 English  |
 | RemoveImageBackground| Python | [No link]() | 15min | 3 | 🇬🇧 English  |
 | MandalaArt| Python | [No link]() | 7min | 3 | 🇬🇧 English  |
+| InteractiveSpiralOfSquares| Python | [No link]() | 7min | 3 | 🇬🇧 English  |
 
 ---
