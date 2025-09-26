@@ -50,5 +50,7 @@ Want to add a new project?
 | RemoveImageBackground| Python | [No link]() | 15min | 3 | 🇬🇧 English  |
 | MandalaArt| Python | [No link]() | 7min | 3 | 🇬🇧 English  |
 | InteractiveSpiralOfSquares| Python | [No link]() | 7min | 3 | 🇬🇧 English  |
+| GenerativeTriangleGrid| Python | [No link]() | 7min | 3 | 🇬🇧 English  |
+
 
 ---
