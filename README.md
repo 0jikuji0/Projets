@@ -45,4 +45,9 @@ Want to add a new project?
 | Code-editor| Html-Css-Js | [Watch Here](https://www.youtube.com/watch?v=Vs4hQsDpxww&list=PLhkm3BkGypZw1LzV89WMog5Vi0jrX4lou&index=13) | 3hr | 4 | 🇬🇧 English |
 | Arduino-I2C-SafeChess | Arduino(C++) | [No link]() | 7hr | 7 | 🇫🇷 French  |
 | ColorfulGalaxy | Python | [No link]() | 15min | 3 | 🇬🇧 English  |
+| Leetcode/twosum | Python | [No link]() | 10min | 1 | 🇬🇧 English  |
+| PsychedelicGradientArt| Python | [No link]() | 10min | 2 | 🇬🇧 English  |
+| RemoveImageBackground| Python | [No link]() | 15min | 3 | 🇬🇧 English  |
+| MandalaArt| Python | [No link]() | 7min | 3 | 🇬🇧 English  |
+
 ---
