@@ -1,61 +1,104 @@
 import os
-from yt_dlp import YoutubeDL
+import subprocess
+import sys
 
-def telecharger_video(url, dossier_destination="videos"):
+def install_dependencies():
+    """Installe les dépendances nécessaires"""
+    packages = ['yt-dlp', 'ffmpeg-python']
+    for package in packages:
+        try:
+            __import__(package.replace('-', '_'))
+        except ImportError:
+            print(f"Installation de {package}...")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+install_dependencies()
+
+import yt_dlp
+import ffmpeg
+
+def download_youtube_video(url, output_format='mp4'):
     """
-    Télécharge une vidéo YouTube
+    Télécharge une vidéo YouTube et la convertit au format demandé
     
-    Args:
-        url: L'URL de la vidéo YouTube
-        dossier_destination: Dossier où sauvegarder la vidéo
+    Formats supportés: mp4, mov, mkv
+    CapCut supporte bien: mp4, mov
     """
     
-    # Créer le dossier s'il n'existe pas
-    if not os.path.exists(dossier_destination):
-        os.makedirs(dossier_destination)
+    formats_caput = ['mp4', 'mov', 'mkv']
     
-    # Configuration de yt-dlp
-    options = {
-        'format': 'best',  # Meilleure qualité disponible
-        'outtmpl': os.path.join(dossier_destination, '%(title)s.%(ext)s'),
-        'quiet': False,
-        'no_warnings': False,
-    }
+    if output_format.lower() not in formats_caput:
+        print(f"Format non supporté. Utilisez: {', '.join(formats_caput)}")
+        return False
     
     try:
-        print(f"Téléchargement de: {url}")
-        with YoutubeDL(options) as ydl:
+        # Créer un dossier pour les téléchargements
+        output_dir = "videos_telechargees"
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+        
+        # Options pour yt-dlp
+        ydl_opts = {
+            'format': 'best[ext=mp4]/best',
+            'outtmpl': os.path.join(output_dir, '%(title)s.%(ext)s'),
+            'quiet': False,
+            'no_warnings': False,
+        }
+        
+        print("📥 Téléchargement de la vidéo...")
+        
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=True)
-            nom_fichier = ydl.prepare_filename(info)
-            print(f"✓ Vidéo téléchargée avec succès: {nom_fichier}")
-    
+            video_path = ydl.prepare_filename(info)
+        
+        # Si le format n'est pas mp4, convertir
+        file_ext = os.path.splitext(video_path)[1][1:]
+        
+        if file_ext.lower() != output_format.lower():
+            print(f"🔄 Conversion de {file_ext} à {output_format}...")
+            output_video = os.path.splitext(video_path)[0] + f'.{output_format}'
+            
+            ffmpeg.input(video_path).output(output_video, vcodec='libx264', acodec='aac').run(quiet=False, overwrite_output=True)
+            
+            # Supprimer l'ancien fichier
+            os.remove(video_path)
+            video_path = output_video
+            print(f"✅ Fichier converti: {output_video}")
+        
+        print(f"✅ Vidéo téléchargée avec succès!")
+        print(f"📍 Chemin: {video_path}")
+        print(f"📱 Compatible CapCut: OUI")
+        
+        return True
+        
     except Exception as e:
-        print(f"✗ Erreur lors du téléchargement: {e}")
+        print(f"❌ Erreur: {e}")
+        return False
 
 def main():
-    """Menu principal"""
     print("=" * 50)
-    print("   Téléchargeur de vidéos YouTube")
+    print("   TÉLÉCHARGEUR YOUTUBE → CapCut Compatible")
     print("=" * 50)
     
-    while True:
-        url = input("\nEntrez l'URL YouTube (ou 'quitter' pour arrêter): ").strip()
-        
-        if url.lower() == 'quitter':
-            print("Au revoir!")
-            break
-        
-        if not url:
-            print("Veuillez entrer une URL valide.")
-            continue
-        
-        # Demander le dossier de destination (optionnel)
-        dossier = input("Dossier de destination (Entrée pour 'videos'): ").strip()
-        if not dossier:
-            dossier = "videos"
-        
-        telecharger_video(url, dossier)
-        print()
+    url = input("\n📌 Colle l'URL YouTube: ").strip()
+    
+    if not url:
+        print("❌ URL vide!")
+        return
+    
+    print("\nFormats disponibles (CapCut-compatible):")
+    print("1. MP4 (recommandé)")
+    print("2. MOV")
+    print("3. MKV")
+    
+    choice = input("\nChoisis le format (1/2/3) [défaut: 1]: ").strip()
+    
+    format_map = {'1': 'mp4', '2': 'mov', '3': 'mkv'}
+    output_format = format_map.get(choice, 'mp4')
+    
+    download_youtube_video(url, output_format)
+    
+    input("\n✅ Appuie sur Entrée pour terminer...")
 
 if __name__ == "__main__":
     main()
