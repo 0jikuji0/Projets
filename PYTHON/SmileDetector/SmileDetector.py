@@ -40,7 +40,7 @@ while True:
                 cv2.rectangle(frame,(x+x1,y+y1),(x+x1+w1,y+y1+h1),(0,0,255),2)
                 smile_meter(frame,x,y)
         else:
-            smile_meter(frame,x,y)  # ✅ Affiche toujours le pourcentage même sans sourire
+            smile_meter(frame,x,y)  
 
     cv2.imshow("smile meter",frame)
     key=cv2.waitKey(1)
