@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gentle Mates - Matches</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#121212; color:#fff; padding:20px; }
+    #match-widget { max-width: 500px; margin:auto; }
+    .match-card { background: rgba(255,255,255,0.03); padding:8px; border-radius:6px; margin-bottom:8px; }
+    .teams { display:flex; justify-content:space-between; align-items:center; }
+    .vs { font-weight:700; margin:0 6px; }
+    .meta { font-size:12px; color: #aaa; margin-top:4px; }
+    .error { color:red; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <h1>Prochain match — Gentle Mates</h1>
+  <div id="match-widget">
+    <div id="status">Chargement…</div>
+    <div id="content"></div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
