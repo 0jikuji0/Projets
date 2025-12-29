@@ -1,0 +1,102 @@
+import yt_dlp
+import os
+from pathlib import Path
+
+class ShortsDownloader:
+    def __init__(self, output_folder="shorts_downloads"):
+        """
+        Initialise le téléchargeur de Shorts
+        
+        Args:
+            output_folder: Dossier de destination pour les vidéos
+        """
+        self.output_folder = output_folder
+        Path(output_folder).mkdir(exist_ok=True)
+    
+    def download_shorts(self, keyword, max_videos=5):
+        """
+        Télécharge des YouTube Shorts basés sur un mot-clé
+        
+        Args:
+            keyword: Mot-clé de recherche (ex: "ishowspeed")
+            max_videos: Nombre maximum de vidéos à télécharger
+        """
+        print(f"🔍 Recherche de Shorts avec le mot-clé: '{keyword}'")
+        print(f"📊 Nombre de vidéos à télécharger: {max_videos}\n")
+        
+        # URL de recherche YouTube pour les Shorts
+        search_url = f"ytsearch{max_videos}:{keyword} shorts"
+        
+        # Options de téléchargement
+        ydl_opts = {
+            'format': 'best',
+            'outtmpl': f'{self.output_folder}/%(title)s.%(ext)s',
+            'quiet': False,
+            'no_warnings': False,
+            'extract_flat': False,
+            'match_filter': self._is_short,  # Filtre pour ne garder que les Shorts
+        }
+        
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                print("⏳ Téléchargement en cours...\n")
+                info = ydl.extract_info(search_url, download=True)
+                
+                if 'entries' in info:
+                    downloaded = len([e for e in info['entries'] if e])
+                    print(f"\n✅ Téléchargement terminé: {downloaded} vidéo(s)")
+                else:
+                    print("\n✅ Téléchargement terminé: 1 vidéo")
+                    
+        except Exception as e:
+            print(f"\n❌ Erreur lors du téléchargement: {str(e)}")
+    
+    def _is_short(self, info_dict):
+        """
+        Filtre pour vérifier si une vidéo est un Short
+        Les Shorts ont généralement une durée < 60 secondes
+        """
+        duration = info_dict.get('duration', 0)
+        if duration and duration <= 60:
+            return None  # None signifie "accepter cette vidéo"
+        return "Vidéo ignorée (pas un Short)"
+
+
+def main():
+    """Fonction principale"""
+    print("=" * 60)
+    print("🎬 TÉLÉCHARGEUR DE YOUTUBE SHORTS")
+    print("=" * 60 + "\n")
+    
+    # Créer une instance du téléchargeur
+    downloader = ShortsDownloader(output_folder="shorts_downloads")
+    
+    # Demander le mot-clé à l'utilisateur
+    keyword = input("🔑 Entrez le mot-clé de recherche (ex: ishowspeed): ").strip()
+    
+    if not keyword:
+        print("❌ Erreur: Vous devez entrer un mot-clé")
+        return
+    
+    # Demander le nombre de vidéos
+    try:
+        max_videos = int(input("📊 Nombre de Shorts à télécharger (ex: 5): ").strip())
+        if max_videos <= 0:
+            print("❌ Erreur: Le nombre doit être supérieur à 0")
+            return
+    except ValueError:
+        print("❌ Erreur: Veuillez entrer un nombre valide")
+        return
+    
+    print("\n" + "=" * 60 + "\n")
+    
+    # Lancer le téléchargement
+    downloader.download_shorts(keyword, max_videos)
+    
+    print("\n" + "=" * 60)
+    print(f"📁 Les vidéos sont enregistrées dans: {os.path.abspath(downloader.output_folder)}")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    main()
