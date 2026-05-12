@@ -144,9 +144,9 @@ def is_slideshow(info: dict, url: str) -> bool:
     return False
 
 
-def main(url: str) -> None:
+def download_one(url: str) -> None:
     url = normalize_url(url)
-    print(f"→ Analyse de {url}")
+    print(f"  → Analyse de {url}")
     info = extract_info(url)
 
     title = sanitize(info.get("title") or info.get("id") or "tiktok")
@@ -154,24 +154,68 @@ def main(url: str) -> None:
     folder.mkdir(parents=True, exist_ok=True)
 
     write_description(folder, info)
-    print(f"→ Description sauvegardée dans {folder}/description.txt")
+    print(f"  → Description sauvegardée dans {folder}/description.txt")
 
     if is_slideshow(info, url):
-        print("→ Carrousel d'images détecté")
+        print("  → Carrousel d'images détecté")
         n = download_images(folder, info, url)
-        print(f"→ {n} image(s) téléchargée(s) dans {folder}")
+        print(f"  → {n} image(s) téléchargée(s) dans {folder}")
     else:
-        print("→ Vidéo détectée")
+        print("  → Vidéo détectée")
         download_video(folder, info.get("webpage_url") or url)
-        print(f"→ Vidéo téléchargée dans {folder}")
+        print(f"  → Vidéo téléchargée dans {folder}")
+
+
+def read_urls_from_file(path: Path) -> list:
+    urls = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            urls.append(line)
+    return urls
+
+
+def process_urls(urls: list) -> None:
+    total = len(urls)
+    if total == 0:
+        print("Aucune URL à traiter.")
+        return
+
+    print(f"→ {total} URL(s) à télécharger\n")
+    successes, failures = 0, []
+
+    for i, url in enumerate(urls, 1):
+        print(f"[{i}/{total}] {url}")
+        try:
+            download_one(url)
+            successes += 1
+            print(f"  ✓ Terminé ({i}/{total})\n")
+        except yt_dlp.utils.DownloadError as e:
+            failures.append((url, str(e)))
+            print(f"  ✗ Erreur de téléchargement : {e}\n")
+        except Exception as e:
+            failures.append((url, str(e)))
+            print(f"  ✗ Erreur : {e}\n")
+
+    print("=" * 50)
+    print(f"Résumé : {successes}/{total} réussi(s), {len(failures)} échec(s)")
+    if failures:
+        print("\nÉchecs :")
+        for url, err in failures:
+            print(f"  - {url} : {err}")
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage : python3 tiktok_download.py <url_tiktok>")
+        print("Usage : python3 tiktok_download.py <url_tiktok | fichier.txt>")
         sys.exit(1)
-    try:
-        main(sys.argv[1])
-    except yt_dlp.utils.DownloadError as e:
-        print(f"Erreur de téléchargement : {e}")
-        sys.exit(1)
+
+    arg = sys.argv[1]
+    path = Path(arg)
+    if path.is_file():
+        urls = read_urls_from_file(path)
+        print(f"→ Lecture de {path} : {len(urls)} URL(s) trouvée(s)")
+    else:
+        urls = [arg]
+
+    process_urls(urls)
