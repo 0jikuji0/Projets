@@ -1,3 +1,6 @@
 *.webm
 *.mp4
 *.m4a
+.DS_Store
+PYTHON/TiktokDownloader/downloads/
+PYTHON/TiktokDownloader/urls.txt
