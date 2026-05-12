@@ -144,10 +144,42 @@ def is_slideshow(info: dict, url: str) -> bool:
     return False
 
 
+def fallback_slideshow_from_html(url: str) -> bool:
+    """Quand yt-dlp échoue, tente d'extraire un slideshow directement depuis le HTML TikTok."""
+    item = scrape_tiktok_post(url)
+    if not item:
+        return False
+    image_post = item.get("imagePost") or {}
+    images = image_post.get("images") or []
+    if not images:
+        return False
+
+    post_id = str(item.get("id") or "tiktok")
+    desc = item.get("desc") or ""
+    author = (item.get("author") or {}).get("uniqueId", "")
+    title = sanitize(desc or post_id)
+    folder = DOWNLOAD_DIR / f"{post_id}_{title}"
+    folder.mkdir(parents=True, exist_ok=True)
+
+    content = f"URL : {url}\nAuteur : {author}\n\nDescription :\n{desc}\n"
+    (folder / "description.txt").write_text(content, encoding="utf-8")
+    print(f"  → Description sauvegardée dans {folder}/description.txt")
+    print("  → Carrousel d'images détecté (fallback HTML)")
+    n = download_images(folder, {}, url)
+    print(f"  → {n} image(s) téléchargée(s) dans {folder}")
+    return True
+
+
 def download_one(url: str) -> None:
     url = normalize_url(url)
     print(f"  → Analyse de {url}")
-    info = extract_info(url)
+    try:
+        info = extract_info(url)
+    except yt_dlp.utils.DownloadError as e:
+        print(f"  ! yt-dlp a échoué, tentative via scraping HTML…")
+        if fallback_slideshow_from_html(url):
+            return
+        raise
 
     title = sanitize(info.get("title") or info.get("id") or "tiktok")
     folder = DOWNLOAD_DIR / f"{info.get('id', 'tiktok')}_{title}"
