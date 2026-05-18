@@ -4,3 +4,8 @@
 .DS_Store
 PYTHON/TiktokDownloader/downloads/
 PYTHON/TiktokDownloader/urls.txt
+PYTHON/YoutubeChannelGrabber/downloads/
+PYTHON/YoutubeChannelGrabber/links/
+.idea/
+venv/
+__pycache__/
